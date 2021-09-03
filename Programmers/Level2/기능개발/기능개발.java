@@ -1,41 +1,19 @@
 import java.util.*;
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        int[] answer = {};
-        Queue<Integer> days = new LinkedList<>();
-        ArrayList<Integer> arr;
+        int[] answer = new int[100];	// 최대 100일 걸리므로 배열의 크기를 100으로.
+	
+	// n일 걸리는 작업의 개수를 count하여 배열의 n번째 원소에 넣기
+	int day = -1;
+	for(int i=0; i<progresses.length; i++) {
+		while(progresses[i] + speeds[i]*day < 100) {
+			day++;
+		}
+		answer[day]++;
+	}
 
-        for(int i=0; i<progresses.length; i++) {
-          days.add((int)Math.ceil((float)(100 - progresses[i])/speeds[i]));
-        }
-
-        arr = deploy(days);
-
-        answer = new int[arr.size()];
-        for(int i=0; i<arr.size(); i++) {
-          answer[i] = arr.get(i);
-        }
-        
-        return answer;
+	// stream 사용하여 람다식으로
+	// filter사용해서 0이 아닌 값들만 걸러주기
+	return Arrays.stream(answer).filter(i->i!=0).toArray();
     }
-    
-    public ArrayList<Integer> deploy (Queue<Integer> days) {
-        ArrayList<Integer> ans = new ArrayList<>();
-        int count = 0;
-        int work = days.peek();
-
-        while(!days.isEmpty()) {
-          if(work >= days.peek()) {
-            count++;
-            days.poll();
-          } else {
-            ans.add(count);
-            work = days.peek();
-            count = 0;
-          }
-        }
-        ans.add(count);
-        return ans;
-	  }
-    
 }
