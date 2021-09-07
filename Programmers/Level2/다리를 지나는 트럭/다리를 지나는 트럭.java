@@ -1,34 +1,57 @@
-
 import java.util.*;
+
 class Solution {
-    public int solution(int bridge_length, int weight, int[] truck_weights) {
+    class Truck {
+        int weight;
+        int move;
+
+        public Truck(int weight) {
+            this.weight = weight;
+            this.move = 1;
+        }
+
+        public void moving() {
+            move++;
+        }
+    }
+
+    public int solution(int bridgeLength, int weight, int[] truckWeights) {
+        Queue<Truck> waitQ = new LinkedList<>();
+        Queue<Truck> moveQ = new LinkedList<>();
+
+        for (int t : truckWeights) {
+            waitQ.offer(new Truck(t));
+        }
+
         int answer = 0;
-        Queue<Integer> queue = new LinkedList<>();
-        int sum = 0;
+        int curWeight = 0;
 
-		for (int i = 0; i < truck_weights.length; i++) {
-			while(true) {
-				if (queue.isEmpty()) {
-					queue.add(truck_weights[i]);
-					sum += truck_weights[i];
-					answer++;
-					break;
-				} else if (queue.size() == bridge_length) {
-					sum -= queue.poll();
-				} else {
-					if (sum + truck_weights[i] > weight) {
-						queue.add(0);
-						answer++;
-					} else {
-						queue.add(truck_weights[i]);
-						sum += truck_weights[i];
-						answer++;
-						break;
-					}
-				}
-			}
-		}
+        while (!waitQ.isEmpty() || !moveQ.isEmpty()) {
+            answer++;
 
-		return answer+bridge_length;
-	}
+            if (moveQ.isEmpty()) {
+                Truck t = waitQ.poll();
+                curWeight += t.weight;
+                moveQ.offer(t);
+                continue;
+            }
+
+            for (Truck t : moveQ) {
+                t.moving();
+            }
+
+            if (moveQ.peek().move > bridgeLength) {
+                Truck t = moveQ.poll();
+                curWeight -= t.weight;
+            }
+
+            if (!waitQ.isEmpty() && curWeight + waitQ.peek().weight <= weight) {
+                Truck t = waitQ.poll();
+                curWeight += t.weight;
+                moveQ.offer(t);
+            }
+        }
+
+        return answer;
+    }
 }
