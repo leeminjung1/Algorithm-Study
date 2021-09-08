@@ -1,17 +1,12 @@
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
+import static java.util.stream.Collectors.*;
 
 class Solution {
     public int solution(String[][] clothes) {
-       int answer = 1;
-        HashMap<String, Integer> hashMap = new HashMap<>();
-
-        for(int i=0; i<clothes.length; i++) {
-            if (hashMap.containsKey(clothes[i][1])) hashMap.put(clothes[i][1], hashMap.get(clothes[i][1]) + 1);
-            else hashMap.put(clothes[i][1], 2);
-        }
-
-        for (Iterator<Integer> i = hashMap.values().iterator(); i.hasNext(); ) answer *= i.next();
-        return answer -1;
+        return Arrays.stream(clothes)
+                .collect(groupingBy(p -> p[1], mapping(p -> p[0], counting())))
+                .values()
+                .stream()
+                .collect(reducing(1L, (x, y) -> x * (y + 1))).intValue() - 1;
     }
 }
