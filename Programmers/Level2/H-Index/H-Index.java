@@ -2,20 +2,14 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] citations) {
-        int answer = citations.length;
-		    int h = 0;
-        
         Arrays.sort(citations);
 
-        for (int i = citations.length; i >= 0; i--) {
-          for(int j=citations.length-1; j>=0; j--) {
-            if(citations[j] >= i) h++;
-            else break;
-          }
-          if(i <= h) return i;
-          h=0;
+        int max = 0;
+        for(int i = citations.length-1; i > -1; i--){
+            int min = (int)Math.min(citations[i], citations.length - i);
+            if(max < min) max = min;
         }
-        
-        return answer;
+
+        return max;
     }
 }
