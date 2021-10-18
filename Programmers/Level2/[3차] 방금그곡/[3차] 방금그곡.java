@@ -21,25 +21,25 @@ class Solution {
             if(t < time[i]) {
                 StringBuilder s = new StringBuilder();
                 for (int j = 0; j < time[i]; j++) {
-                  s.append(music[i].charAt(j % music[i].length()));
+                	s.append(music[i].charAt(j % music[i].length()));
                 }
                 if (s.toString().contains(convert(m))) {
-                  answer = title[i];
-                  t = time[i];
+                	answer = title[i];
+                	t = time[i];
                 }
             }
         }
       
         return answer;
     }
-
-	public static String convert(String s) {
-      for (int j = 0; j < s.length(); j++) {
-          if(s.charAt(j) == '#') {
-              s = s.substring(0, j - 1) + s.substring(j - 1, j).toLowerCase() + s.substring(j + 1);
-          }
-      }
-      return s;
-	}
+	
+    public static String convert(String s) {
+    	for (int j = 0; j < s.length(); j++) {
+        	if(s.charAt(j) == '#') {
+            	s = s.substring(0, j - 1) + s.substring(j - 1, j).toLowerCase() + s.substring(j + 1);
+          	}
+      	}
+      	return s;
+    }
 
 }
