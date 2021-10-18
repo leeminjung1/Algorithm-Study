@@ -33,13 +33,15 @@ class Solution {
         return answer;
     }
 	
-    public static String convert(String s) {
-    	for (int j = 0; j < s.length(); j++) {
-        	if(s.charAt(j) == '#') {
-            	s = s.substring(0, j - 1) + s.substring(j - 1, j).toLowerCase() + s.substring(j + 1);
-          	}
-      	}
-      	return s;
-    }
+	public static String convert(String s) {
+		s = s.replaceAll("C#", "c");
+		s = s.replaceAll("D#", "d");
+		s = s.replaceAll("E#", "e");
+		s = s.replaceAll("F#", "f");
+		s = s.replaceAll("G#", "g");
+		s = s.replaceAll("A#", "a");
+		s = s.replaceAll("B#", "b");
+		return s;
+	}
 
 }
