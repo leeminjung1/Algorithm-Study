@@ -33,6 +33,7 @@ class Solution {
             set.add((cx - x) + "" + (cy - y) + "" + cx + "" + cy);
 			set.add(cx + "" + cy + "" + (cx - x) + "" + (cy - y));
         } 
+		
         return set.size()/2;
     }
 }
