@@ -20,7 +20,7 @@ class Solution {
 		int cnt = 0;
 		int[] dr = { -1, 0, 1, 0 }, dc = { 0, -1, 0, 1 };
 		
-        while (!isVisited[row][col][k]) {
+        	while (!isVisited[row][col][k]) {
 			cnt++;
 			isVisited[row][col][k] = true;
 
