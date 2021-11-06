@@ -7,20 +7,18 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int x = Integer.parseInt(br.readLine());
 
-        int diagonal = 1, sum = 0;
-
+        int sum = 0;
+        int cnt = 0;
         while (true) {
-            if (x <= sum + diagonal) {
-                int j = x - sum;
-                int i = diagonal - (j - 1);
-                if (diagonal % 2 == 1)
-                    System.out.print(i + "/" + j);
+            cnt++;
+            sum += cnt;
+            if (sum >= x) {
+                System.out.println(sum+ " " +cnt);
+                if (cnt % 2 == 0)
+                    System.out.println((x - sum + cnt) + "/" + (sum - x + 1));
                 else
-                    System.out.print(j + "/" + i);
+                    System.out.println((sum - x + 1) + "/" + (x - sum + cnt));
                 break;
-            } else {
-                sum += diagonal;
-                diagonal++;
             }
         }
 
