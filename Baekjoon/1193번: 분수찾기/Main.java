@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -12,17 +11,18 @@ public class Main {
 
         while (true) {
             if (x <= sum + diagonal) {
-                if (diagonal % 2 == 1) { 
-                    System.out.print((diagonal - (x - sum - 1)) + "/" + (x - sum));
-                    break;
-                } else { 
-                    System.out.print((x - sum) + "/" + (diagonal - (x - sum - 1)));
-                    break;
-                }
+                int j = x - sum;
+                int i = diagonal - (j - 1);
+                if (diagonal % 2 == 1)
+                    System.out.print(i + "/" + j);
+                else
+                    System.out.print(j + "/" + i);
+                break;
             } else {
                 sum += diagonal;
                 diagonal++;
             }
         }
+
     }
 }
