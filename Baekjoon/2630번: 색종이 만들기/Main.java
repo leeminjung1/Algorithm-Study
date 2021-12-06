@@ -1,77 +1,43 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
- 
- 
+import java.io.InputStreamReader;
+
 public class Main {
-	
-	// 색상 카운트 할 변수 및 색종이(board)
-	public static int white = 0;
-	public static int blue = 0;
-	public static int[][] board;
- 
-	public static void main(String[] args) throws IOException {
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int N = Integer.parseInt(br.readLine());
-		
-		board = new int[N][N];
-		
-		StringTokenizer st;
-		
-		for(int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
-			
-			for(int j = 0; j < N; j++) {
-				board[i][j] = Integer.parseInt(st.nextToken());
-			}
-		}
-		
-		partition(0, 0, N);
-		
-		System.out.println(white);
-		System.out.println(blue);
-		
-	}
-	
-	public static void partition(int row, int col, int size) {
-		
-		//
-		if(colorCheck(row, col, size)) {
-			if(board[row][col] == 0) {
-				white++;
-			}
-			else {
-				blue++;
-			}
-			return;
-		}
-		
-		int newSize = size / 2;	// 절반 사이즈
-		// 재귀 호출
-		partition(row, col, newSize);						// 2사분면
-		partition(row, col + newSize, newSize);				// 1사분면
-		partition(row + newSize, col, newSize);				// 3사분면
-		partition(row + newSize, col + newSize, newSize);	// 4사분면
-	}
-	
-	
-	// 현재 파티션의 컬러가 같은지 체크한다.
-	public static boolean colorCheck(int row, int col, int size) {
-	
-		int color = board[row][col];	// 첫 번째 원소를 기준으로 검사
-		
-		for(int i = row; i < row + size; i++) {
-			for(int j = col; j < col + size; j++) {
-				// 색상이 같이 않다면 false를 리턴 
-				if(board[i][j] != color) {
-					return false;
-				}
-			}
-		}
-		// 검사가 모두 통과했다는 의미이므로 true 리턴
-		return true;
-	}
+    static int blue = 0;
+    static int white = 0;
+    static char[][] paper;
+    public static void main(String[] args) throws IOException  {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        paper = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            String s = br.readLine();
+            for (int j = 0; j < n; j++) {
+                paper[i][j] = s.charAt(j * 2);
+            }
+        }
+        check(0,0,n);
+        System.out.println(white);
+        System.out.println(blue);
+    }
+
+    public static void check(int r, int c, int size) {
+        char flag = paper[r][c];
+        for (int i = r; i < r + size; i++) {
+            for (int j = c; j < c + size; j++) {
+                if (paper[i][j] != flag) {
+                    size /= 2;
+                    check(r, c, size);
+                    check(r, c + size, size);
+                    check(r + size, c, size);
+                    check(r + size, c + size, size);
+                    return;
+                }
+            }
+        }
+        if (flag == '1')
+            blue++;
+        else
+            white++;
+    }
 }
