@@ -24,7 +24,7 @@ public class Main {
 
         Arrays.sort(arr);
 
-        func(0, new boolean[n], new int[n]);
+        func(0, new boolean[n], new int[m]);
 
         System.out.print(sb);
 
