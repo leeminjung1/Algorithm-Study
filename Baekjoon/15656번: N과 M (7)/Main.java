@@ -7,8 +7,8 @@ public class Main {
 
     static int n, m;
     static int[] arr;
-    static int[] ans = new int[7];   
-    
+    static int[] ans = new int[7];
+
     static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
@@ -23,6 +23,15 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
+        sort();
+
+        func(0);
+
+        System.out.print(sb);
+
+    }
+
+    private static void sort() {
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (arr[i] > arr[j]) {
@@ -32,11 +41,6 @@ public class Main {
                 }
             }
         }
-
-        func(0);
-
-        System.out.print(sb);
-
     }
 
     private static void func(int depth) {
