@@ -26,7 +26,6 @@ public class Main {
         sort();
 
         func(0);
-
         System.out.print(sb);
 
     }
