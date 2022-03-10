@@ -1,6 +1,7 @@
 import java.io.*;
+import java.util.Arrays;
 
-public class n2448 {
+public class Main {
 
     static char[][] star;
 
@@ -9,12 +10,10 @@ public class n2448 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
-        star = new char[n][2 * n - 1];
+        star = new char[n][(n << 1) - 1];
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < 2 * n-1; j++) {
-                star[i][j] = ' ';
-            }
+        for (char[] chars : star) {
+            Arrays.fill(chars, ' ');
         }
 
         make(n, 0, n - 1);
@@ -38,7 +37,7 @@ public class n2448 {
             return;
         }
 
-        n /= 2;
+        n >>= 1;
         make(n, y, x);
         make(n, y + n, x - n);
         make(n, y + n, x + n);
