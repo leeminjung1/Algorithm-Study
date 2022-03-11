@@ -66,8 +66,8 @@ public class Main {
                     dist[t] = dist[current] + w;
                     queue.add(new Node(t, dist[t]));
                 }
-
             }
+            
         }
 
         System.out.println(dist[B]);
