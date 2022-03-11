@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class no1916 {
+public class Main {
     private static class Node implements Comparable<Node>{
         public int end;
         public int weight;
