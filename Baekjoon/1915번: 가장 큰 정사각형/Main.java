@@ -9,22 +9,18 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        String[] map = new String[n];
-        for (int i = 0; i < n; i++) {
-            map[i] = br.readLine();
-        }
-
         int[] dp = new int[m + 1];
         int ans = 0;
-        int cur; int next;
+        int upLeft; int up;
         for (int i = 1; i <= n; i++) {
-            cur = 0;
+            upLeft = 0;
             for (int j = 1; j <= m; j++) {
-                next = dp[j];
-                dp[j] = map[i - 1].charAt(j - 1) == '1' ? Math.min(dp[j], Math.min(dp[j - 1], cur)) + 1 : 0;
-                cur = next;
+                up = dp[j];
+                dp[j] = br.read() == '1' ? Math.min(up, Math.min(dp[j - 1], upLeft)) + 1 : 0;
+                upLeft = up;
                 ans = Math.max(ans, dp[j]);
             }
+            br.read();
         }
 
         System.out.println(ans * ans);
